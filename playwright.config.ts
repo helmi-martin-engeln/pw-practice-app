@@ -14,6 +14,15 @@ export default defineConfig<TestOptions>({
   retries: 1,
   //reporter: 'html',
   reporter: [
+    // wenn App.argos-ci.com (Tool) verwendet wird
+ //   process.env.CI ? ["dot"] : ["list"],
+ //   [
+  //    "@argos-ci/playwright/reporter",
+ //     {
+        // upload to Argos on CI only
+ //       uploadToArgos: !!process.env.CI,
+ //     }
+  //  ]
     ['json', {outputFile: 'test-results/jsonReport.json'}],
     ['junit', {outputFile: 'test-results/junitReport.xml'}],
     ['html']
@@ -27,6 +36,7 @@ export default defineConfig<TestOptions>({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+//    screenshot: "only-on-failure",
     actionTimeout: 20000,
     navigationTimeout: 25000,
     video: {
